@@ -1,4 +1,5 @@
 import math
+import time
 class Node:
     
     def __init__(self, data):
@@ -69,6 +70,8 @@ def bsHelp(node, data, savedNode):
         #Do this for all letters after the first one
     #Fix a new letter to the first position
     #Repeat
+
+allPermsArr = []
 def allPerms(s):
     fact = math.factorial(len(s))
     saved = list(s)
@@ -82,7 +85,8 @@ def allPerms(s):
             
             while j < len(s) - 1:
                 #print new perm
-                print "".join(listed)
+                allPermsArr.append("".join(listed))
+                #print "".join(listed)
 
                 #swap
                 tmp = listed[j]
@@ -101,7 +105,26 @@ def allPerms(s):
         saved[0] = saved[fixed]
         saved[fixed] = tmp
 
-#print allPerms("helloyouman?")
+allPermsArr2 = []
+def allPerms2(s, l, r):
+    if l == r:
+        allPermsArr2.append("".join(s))
+    for i in range(l,r + 1):
+        s[i], s[l] = s[l], s[i]
+        allPerms2(s, l + 1, r)
+        s[i], s[l] = s[l], s[i]
+
+string = "permut" # longer than 10 characters give memo error
+start = time.time()
+allPerms2(list(string), 0, len(string) - 1)
+print "time1:", time.time() - start
+start = time.time()
+allPerms(string)
+print "time2:", time.time() - start
+
+# print allPermsArr
+# print allPermsArr2
+print len(allPermsArr) == len(allPermsArr2) == math.factorial(len(string))
 
 
 ######################################################
@@ -294,5 +317,5 @@ ta.parent = qa
 r.right = oa
 oa.parent = r
 
-print ifAncestor(qa, t, q)
+# print ifAncestor(qa, t, q)
 

@@ -21,10 +21,10 @@ def makeCombos(number, mDict):
         result = stack.pop()
         d = len(result) 
         if len(result) == len(numStr):
-                combos.append(result)
+            combos.append(result)
         else:
             for l in mDict[int(numStr[d])]:
                 stack.append(result + l)
     return combos
 
-print makeCombos("5678", phoneDict)
+print makeCombos("56083312", phoneDict)
